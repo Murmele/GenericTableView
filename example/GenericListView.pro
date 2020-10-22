@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ../lib/Widgets/propertyselectionspinbox.cpp \
+    ../lib/genericlistdelegator.cpp \
     ../lib/genericlistmodel.cpp \
     ../lib/genericlistview.cpp \
     ../lib/property.cpp \
@@ -23,6 +25,8 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    ../lib/Widgets/propertyselectionspinbox.h \
+    ../lib/genericlistdelegator.h \
     ../lib/genericlistmodel.h \
     ../lib/genericlistview.h \
     ../lib/property.h \

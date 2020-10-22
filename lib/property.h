@@ -2,11 +2,18 @@
 #define PROPERTY_H
 
 #include <QString>
+#include <QVariant>
+#include <QWidget>
 
-class SelectionWidget
+/*!
+ * \brief The SelectionWidget class
+ * Base class for the widgets in the property
+ * Inherit from this class to create your own widgets
+ */
+class PropertySelectionWidget : public QWidget
 {
 public:
-    SelectionWidget();
+    PropertySelectionWidget(QWidget *parent = nullptr) : QWidget(parent){};
 
     enum class Type {
         SpinBox, // derive from SpinBoxSelectionWidgetProperties
@@ -14,15 +21,30 @@ public:
     };
 
     virtual Type type() const = 0;
-    //virtual QVariant value() const = 0;
+    virtual bool setValue(const QVariant &value) = 0;
+    virtual QVariant value() const = 0;
 };
 
 struct Property
 {
-    QString name; // Property name
-    bool required;
-    SelectionWidget
-        w; // Selectionwidget is an enum with all possible widgets which can be used for changing the value, for example spinbox, font selection, combobox, ....
-}
+    Property();
+    Property(const Property &p);
+    bool setValue(const QVariant &value)
+    {
+        if (!widget)
+            return false;
+        return widget->setValue(value);
+    }
+    QVariant value() const
+    {
+        if (!widget)
+            return QVariant();
+        return widget->value();
+    }
+    QString name{""}; // Property name
+    bool required{false};
+    // PropertySelectionWidget contains a Widget with all possible widgets which can be used for changing the value, for example spinbox, font selection, combobox, ....
+    PropertySelectionWidget *widget{nullptr};
+};
 
 #endif // PROPERTY_H

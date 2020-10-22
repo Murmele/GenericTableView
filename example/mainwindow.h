@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+class GenericListModel;
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -15,7 +17,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void addProperty();
+    void removeProperty();
+
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow *ui{nullptr};
+    GenericListModel *model{nullptr};
+    int propertyCounter{0};
 };
 #endif // MAINWINDOW_H

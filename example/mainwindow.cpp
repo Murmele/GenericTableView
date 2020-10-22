@@ -5,8 +5,11 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
+#include "../lib/genericlistdelegator.h"
 #include "../lib/genericlistmodel.h"
 #include "../lib/genericlistview.h"
+
+#include "../lib/Widgets/propertyselectionspinbox.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,10 +30,16 @@ MainWindow::MainWindow(QWidget *parent)
     //mainLayout->addItem(new QSpacerItem())
 
     GenericListView *view = new GenericListView(this);
-    view->setModel(new GenericListModel(view));
+    model = new GenericListModel(view);
+    view->setModel(model);
+
+    view->setItemDelegate(new GenericListDelegator(view));
     mainLayout->addWidget(view);
 
     ui->centralwidget->setLayout(mainLayout);
+
+    connect(add, &QPushButton::clicked, this, &MainWindow::addProperty);
+    connect(remove, &QPushButton::clicked, this, &MainWindow::removeProperty);
 }
 
 MainWindow::~MainWindow()
@@ -38,3 +47,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::addProperty()
+{
+    Property p;
+    p.name = "Property " + QString::number(propertyCounter);
+    // the spinbox can also be reused
+    p.widget = new PropertySelectionSpinBox(this);
+    model->appendProperty(p);
+    propertyCounter++;
+}
+
+void MainWindow::removeProperty()
+{
+    model->removeProperty(0); // remove always the first property
+}
