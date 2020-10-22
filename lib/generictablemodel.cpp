@@ -12,6 +12,17 @@ int GenericTableModel::columnCount(const QModelIndex &parent) const
     return Columns::ColumnCount;
 }
 
+QVariant GenericTableModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (section < 0 || section >= m_header.length())
+        return QVariant();
+
+    if (orientation == Qt::Orientation::Horizontal && role == Qt::DisplayRole)
+        return m_header[section];
+
+    return QVariant();
+}
+
 QModelIndex GenericTableModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (row < 0 || row > rowCount() - 1 || column < 0 || column > columnCount() - 1)
@@ -30,6 +41,16 @@ Qt::ItemFlags GenericTableModel::flags(const QModelIndex &index) const
     }
 
     return Qt::ItemFlags(Qt::ItemFlag::ItemIsEnabled | Qt::ItemFlag::ItemIsSelectable);
+}
+
+bool GenericTableModel::setHeader(QStringList &header)
+{
+    if (header.length() != ColumnCount)
+        return false;
+
+    m_header = header;
+
+    emit headerDataChanged(Qt::Orientation::Horizontal, 0, m_header.length() - 1);
 }
 
 QVariant GenericTableModel::data(const QModelIndex &index, int role) const

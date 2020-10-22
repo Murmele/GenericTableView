@@ -31,6 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     GenericTableView *view = new GenericTableView(this);
     model = new GenericTableModel(view);
+    QStringList header = {"Name", "Value"};
+    model->setHeader(header);
     view->setModel(model);
 
     view->setItemDelegate(new GenericTableDelegator(view));
