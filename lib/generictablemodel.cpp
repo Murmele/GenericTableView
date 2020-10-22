@@ -153,6 +153,9 @@ bool GenericTableModel::removeProperty(const int &index)
     if (index >= m_properties.length())
         return false;
 
+    if (m_properties[index]->required)
+        return false; // if the property is required, it is not possible to delete it
+
     int first = index;
     int last = index;
     beginRemoveRows(QModelIndex(), first, last);
