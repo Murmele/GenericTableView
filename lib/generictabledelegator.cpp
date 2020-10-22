@@ -24,6 +24,8 @@ QWidget *GenericTableDelegator::createEditor(QWidget *parent,
 
 void GenericTableDelegator::destroyEditor(QWidget *editor, const QModelIndex &index) const
 {
+    Q_UNUSED(editor)
+    Q_UNUSED(index)
     // Do not destory the editor, because it is stored in the Property.
     // By default createEditor() returns a new object and GenericTableDelegator takes over and
     // at the end of editing, the editor gets deleted. We wanna reuse the editor and therefore
@@ -45,11 +47,12 @@ void GenericTableDelegator::setModelData(QWidget *editor,
                                          QAbstractItemModel *model,
                                          const QModelIndex &index) const
 {
-    //    if (!index.isValid())
-    //        return;
+    if (!index.isValid())
+        return;
 
-    //    QVariant value = static_cast<PropertySelectionWidget *>(index.internalPointer())->value();
-    //    model->setData(index, value, Qt::EditRole);
+    Property *p = static_cast<Property *>(index.internalPointer());
+    QVariant value = p->value();
+    model->setData(index, value, Qt::EditRole);
 }
 
 void GenericTableDelegator::updateEditorGeometry(QWidget *editor,

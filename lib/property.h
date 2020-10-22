@@ -34,6 +34,8 @@ struct Property
     {
         if (!widget)
             return false;
+
+        widget->setValue(value);
     }
     QVariant value() const
     {
