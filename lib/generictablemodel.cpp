@@ -37,7 +37,8 @@ Qt::ItemFlags GenericTableModel::flags(const QModelIndex &index) const
         return Qt::ItemFlag::NoItemFlags;
 
     if (index.column() == Columns::Value) {
-        return Qt::ItemFlag::ItemIsEditable;
+        return Qt::ItemFlags(Qt::ItemFlag::ItemIsEnabled | Qt::ItemFlag::ItemIsSelectable
+                             | Qt::ItemFlag::ItemIsEditable);
     }
 
     return Qt::ItemFlags(Qt::ItemFlag::ItemIsEnabled | Qt::ItemFlag::ItemIsSelectable);
