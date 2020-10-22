@@ -26,6 +26,8 @@ public:
     virtual bool setWidgetValue(const QVariant &value) = 0;
     virtual QVariant widgetValue() const = 0;
     virtual QWidget *widget() const = 0;
+    virtual bool validValue(const QVariant &value) const = 0;
+    virtual QVariant initialValue() const = 0;
 };
 
 struct Property
@@ -49,6 +51,7 @@ struct Property
     QString name{""}; // Property name
     bool required{false};
     // PropertySelectionWidget contains a Widget with all possible widgets which can be used for changing the value, for example spinbox, font selection, combobox, ....
+    // TODO: use smartpointer!
     PropertySelectionWidget *widget{nullptr};
 };
 

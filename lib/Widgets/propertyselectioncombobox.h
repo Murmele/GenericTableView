@@ -26,7 +26,9 @@ public:
     virtual QVariant value() const override;
     virtual bool setWidgetValue(const QVariant &value) override;
     virtual QVariant widgetValue() const override;
+    virtual bool validValue(const QVariant &value) const override;
     virtual QWidget *widget() const override { return m_cb; }
+    virtual QVariant initialValue() const override;
 
 private:
     QComboBox *m_cb{nullptr};

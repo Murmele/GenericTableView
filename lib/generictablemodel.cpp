@@ -91,7 +91,7 @@ bool GenericTableModel::setData(const QModelIndex &index, const QVariant &value,
     return false;
 }
 
-bool GenericTableModel::appendProperty(const Property &property)
+bool GenericTableModel::appendProperty(const Property &property, const QVariant initialValue)
 {
     for (Property *p : m_properties) {
         if (p->name == property.name) {
@@ -107,7 +107,14 @@ bool GenericTableModel::appendProperty(const Property &property)
     endInsertRows();
 
     QModelIndex idx = createIndex(first, Columns::Value, m_properties[m_properties.length() - 1]);
-    setData(idx, property.value());
+    if (initialValue.isValid()) {
+        // check if valid value
+        if (property.widget->validValue(initialValue))
+            setData(idx, initialValue);
+        else // set default valid value
+            setData(idx, property.widget->initialValue());
+    } else
+        setData(idx, property.widget->widgetValue());
 
     return true;
 }

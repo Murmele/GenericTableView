@@ -40,3 +40,22 @@ QVariant PropertySelectionSpinBox::widgetValue() const
 {
     return m_sb->value();
 }
+
+bool PropertySelectionSpinBox::validValue(const QVariant &value) const
+{
+    bool ok;
+    int v = value.toInt(&ok);
+
+    if (!ok)
+        return false;
+
+    if (v < m_sb->minimum() || v > m_sb->maximum())
+        return false;
+
+    return true;
+}
+
+QVariant PropertySelectionSpinBox::initialValue() const
+{
+    return m_sb->minimum();
+}

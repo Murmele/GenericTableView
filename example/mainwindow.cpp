@@ -71,7 +71,7 @@ void MainWindow::addCBProperty()
     p.widget = new PropertyselectionCombobox(this);
     QComboBox *cb = static_cast<QComboBox *>(p.widget->widget());
     cb->addItems({"Test1", "Test2"});
-    model->appendProperty(p);
+    model->appendProperty(p, "Test3");
     propertyCounter++;
 }
 
