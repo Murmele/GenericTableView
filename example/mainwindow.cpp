@@ -9,6 +9,7 @@
 #include "../lib/generictablemodel.h"
 #include "../lib/generictableview.h"
 
+#include "../lib/Widgets/propertyselectioncombobox.h"
 #include "../lib/Widgets/propertyselectionspinbox.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -21,8 +22,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     QHBoxLayout *toolButtons
         = new QHBoxLayout(); // for adding tool buttons like adding/removing properties
-    QPushButton *add = new QPushButton("add", this);
-    toolButtons->addWidget(add);
+    QPushButton *addSB = new QPushButton("Add Spinbox Property", this);
+    toolButtons->addWidget(addSB);
+    QPushButton *addCB = new QPushButton("Add Combobox Property", this);
+    toolButtons->addWidget(addCB);
     QPushButton *remove = new QPushButton("remove", this);
     toolButtons->addWidget(remove);
 
@@ -40,7 +43,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->centralwidget->setLayout(mainLayout);
 
-    connect(add, &QPushButton::clicked, this, &MainWindow::addProperty);
+    connect(addSB, &QPushButton::clicked, this, &MainWindow::addSBProperty);
+    connect(addCB, &QPushButton::clicked, this, &MainWindow::addCBProperty);
     connect(remove, &QPushButton::clicked, this, &MainWindow::removeProperty);
 }
 
@@ -49,12 +53,24 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::addProperty()
+void MainWindow::addSBProperty()
 {
     Property p;
     p.name = "Property " + QString::number(propertyCounter);
     // the spinbox can also be reused
     p.widget = new PropertySelectionSpinBox(this);
+    model->appendProperty(p);
+    propertyCounter++;
+}
+
+void MainWindow::addCBProperty()
+{
+    Property p;
+    p.name = "Property " + QString::number(propertyCounter);
+    // the spinbox can also be reused
+    p.widget = new PropertyselectionCombobox(this);
+    QComboBox *cb = static_cast<QComboBox *>(p.widget->widget());
+    cb->addItems({"Test1", "Test2"});
     model->appendProperty(p);
     propertyCounter++;
 }

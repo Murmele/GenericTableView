@@ -48,12 +48,14 @@ void GenericTableDelegator::setModelData(QWidget *editor,
                                          QAbstractItemModel *model,
                                          const QModelIndex &index) const
 {
-    if (!index.isValid())
-        return;
+    // Not needed, because the data of the editor is the same as the data from the model
+    //    if (!index.isValid())
+    //        return;
 
-    Property *p = static_cast<Property *>(index.internalPointer());
-    QVariant value = p->value();
-    model->setData(index, value, Qt::EditRole);
+    //    Property *p = static_cast<Property *>(index.internalPointer());
+    //    QVariant value = p->value();
+    //    model->setData(index, value, Qt::EditRole);
+    model->dataChanged(index, index, {Qt::EditRole});
 }
 
 void GenericTableDelegator::updateEditorGeometry(QWidget *editor,

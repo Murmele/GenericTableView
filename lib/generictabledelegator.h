@@ -7,11 +7,34 @@ class GenericTableDelegator : public QStyledItemDelegate
 {
 public:
     GenericTableDelegator(QObject *parent = nullptr);
+    /*!
+     * \brief createEditor
+     * Called by the view when a cell goes into edit mode
+     * \param parent
+     * \param option
+     * \param index
+     * \return 
+     */
     QWidget *createEditor(QWidget *parent,
                           const QStyleOptionViewItem &option,
                           const QModelIndex &index) const override;
+    /*!
+     * \brief destroyEditor
+     * Called by the view when editing is finished. Reimplemented to prevent
+     * destroying of the editor
+     * \param editor
+     * \param index
+     */
     void destroyEditor(QWidget *editor, const QModelIndex &index) const override;
     void setEditorData(QWidget *editor, const QModelIndex &index) const override;
+    /*!
+     * \brief setModelData
+     * Called from the view when editing is finished and the editor content must be 
+     * set in the model
+     * \param editor
+     * \param model
+     * \param index
+     */
     void setModelData(QWidget *editor,
                       QAbstractItemModel *model,
                       const QModelIndex &index) const override;
