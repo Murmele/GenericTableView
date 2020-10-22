@@ -10,6 +10,7 @@ public:
     QWidget *createEditor(QWidget *parent,
                           const QStyleOptionViewItem &option,
                           const QModelIndex &index) const override;
+    void destroyEditor(QWidget *editor, const QModelIndex &index) const override;
 };
 
 #endif // GENERICTABLEDELEGATOR_H

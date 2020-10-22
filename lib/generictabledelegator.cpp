@@ -13,8 +13,19 @@ QWidget *GenericTableDelegator::createEditor(QWidget *parent,
         return nullptr;
     else if (index.column() == GenericTableModel::Columns::Value) {
         Property *p = static_cast<Property *>(index.internalPointer());
-        return p->widget;
+        //Only possible when widget gets not destroyed in destroy Editor
+        QWidget *w = p->widget->widget();
+        w->setParent(parent);
+        return w;
     }
 
     return nullptr;
+}
+
+void GenericTableDelegator::destroyEditor(QWidget *editor, const QModelIndex &index) const
+{
+    // Do not destory the editor, because it is stored in the Property.
+    // By default createEditor() returns a new object and GenericTableDelegator takes over and
+    // at the end of editing, the editor gets deleted. We wanna reuse the editor and therefore
+    // it should not be deleted.
 }
