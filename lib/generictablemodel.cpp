@@ -33,7 +33,7 @@ QModelIndex GenericTableModel::index(int row, int column, const QModelIndex &par
 
 Qt::ItemFlags GenericTableModel::flags(const QModelIndex &index) const
 {
-    if (index.isValid())
+    if (!index.isValid())
         return Qt::ItemFlag::NoItemFlags;
 
     if (index.column() == Columns::Value) {
