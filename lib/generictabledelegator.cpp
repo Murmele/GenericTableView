@@ -29,3 +29,35 @@ void GenericTableDelegator::destroyEditor(QWidget *editor, const QModelIndex &in
     // at the end of editing, the editor gets deleted. We wanna reuse the editor and therefore
     // it should not be deleted.
 }
+
+void GenericTableDelegator::setEditorData(QWidget *editor, const QModelIndex &index) const
+{
+    //    if (!index.isValid())
+    //        return;
+
+    //    QVariant val = index.model()->data(index, Qt::EditRole);
+
+    //    PropertySelectionWidget *p = static_cast<PropertySelectionWidget *>(index.internalPointer());
+    //    p->setValue(val);
+}
+
+void GenericTableDelegator::setModelData(QWidget *editor,
+                                         QAbstractItemModel *model,
+                                         const QModelIndex &index) const
+{
+    //    if (!index.isValid())
+    //        return;
+
+    //    QVariant value = static_cast<PropertySelectionWidget *>(index.internalPointer())->value();
+    //    model->setData(index, value, Qt::EditRole);
+}
+
+void GenericTableDelegator::updateEditorGeometry(QWidget *editor,
+                                                 const QStyleOptionViewItem &option,
+                                                 const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return;
+
+    editor->setGeometry(option.rect);
+}
