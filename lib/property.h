@@ -20,6 +20,11 @@ public:
         ComboBox
     };
 
+    /*!
+     * \brief type
+     * Currently not used, because it limits the extendible
+     * \return
+     */
     virtual Type type() const = 0;
     /*!
      * \brief setValue
