@@ -1,5 +1,7 @@
 # Generic Table View
-Implements a generic table view where the cells can be modified by userdefined widgets. Use the example to test the functionality
+## Idea
+When having generic properties the user can extend, it is usefull to store them into a table. Each property has it's own datatype and limits. To solve this problem, a generic table view is created where it can be choosen how the data should be modified.
+Use the example to test the functionality.
 
 ## Usage
 Add this repository as submodule into your project and set the paths to the headers and source files
