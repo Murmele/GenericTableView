@@ -24,10 +24,13 @@ public:
      * \return 
      */
     virtual QVariant value() const override;
+    virtual bool setWidgetValue(const QVariant &value) override;
+    virtual QVariant widgetValue() const override;
     virtual QWidget *widget() const override { return m_cb; }
 
 private:
     QComboBox *m_cb{nullptr};
+    QString m_currentText{""};
 };
 
 #endif // PROPERTYSELECTIONCOMBBOX_H

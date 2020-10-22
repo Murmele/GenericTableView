@@ -32,30 +32,29 @@ void GenericTableDelegator::destroyEditor(QWidget *editor, const QModelIndex &in
     // it should not be deleted.
 }
 
+// model --> editor
 void GenericTableDelegator::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    // Works, but not needed, because the data of the editor is the same as the data for the model
-    //    if (!index.isValid())
-    //        return;
+    if (!index.isValid())
+        return;
 
-    //    QVariant val = index.model()->data(index, Qt::EditRole);
+    QVariant val = index.model()->data(index, Qt::EditRole);
 
-    //    Property *p = static_cast<Property *>(index.internalPointer());
-    //    p->setValue(val);
+    Property *p = static_cast<Property *>(index.internalPointer());
+    p->widget->setWidgetValue(val);
 }
 
+// editor --> model
 void GenericTableDelegator::setModelData(QWidget *editor,
                                          QAbstractItemModel *model,
                                          const QModelIndex &index) const
 {
-    // Not needed, because the data of the editor is the same as the data from the model
-    //    if (!index.isValid())
-    //        return;
+    if (!index.isValid())
+        return;
 
-    //    Property *p = static_cast<Property *>(index.internalPointer());
-    //    QVariant value = p->value();
-    //    model->setData(index, value, Qt::EditRole);
-    model->dataChanged(index, index, {Qt::EditRole});
+    Property *p = static_cast<Property *>(index.internalPointer());
+    QVariant value = p->widget->widgetValue();
+    model->setData(index, value, Qt::EditRole);
 }
 
 void GenericTableDelegator::updateEditorGeometry(QWidget *editor,

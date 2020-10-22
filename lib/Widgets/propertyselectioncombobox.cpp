@@ -10,14 +10,22 @@ PropertySelectionWidget::Type PropertyselectionCombobox::type() const
 }
 bool PropertyselectionCombobox::setValue(const QVariant &value)
 {
-    int index = value.toInt();
-    if (index < 0 || index >= m_cb->count())
-        return false;
-
-    m_cb->setCurrentIndex(index);
+    m_currentText = value.toString();
     return true;
 }
 QVariant PropertyselectionCombobox::value() const
+{
+    // m_cb might be used also in other properties. So use m_currentText instead
+    // of the currentText() from m_cb
+    return m_currentText;
+}
+
+bool PropertyselectionCombobox::setWidgetValue(const QVariant &value)
+{
+    m_cb->setCurrentText(value.toString());
+}
+
+QVariant PropertyselectionCombobox::widgetValue() const
 {
     return m_cb->currentText();
 }

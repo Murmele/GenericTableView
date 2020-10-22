@@ -23,6 +23,8 @@ public:
     virtual Type type() const = 0;
     virtual bool setValue(const QVariant &value) = 0;
     virtual QVariant value() const = 0;
+    virtual bool setWidgetValue(const QVariant &value) = 0;
+    virtual QVariant widgetValue() const = 0;
     virtual QWidget *widget() const = 0;
 };
 
