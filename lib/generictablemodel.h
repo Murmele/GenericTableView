@@ -1,13 +1,13 @@
-#ifndef GENERICLISTMODEL_H
-#define GENERICLISTMODEL_H
+#ifndef GENERICTABLEMODEL_H
+#define GENERICTABLEMODEL_H
 
 #include "../lib/property.h"
-#include <QAbstractListModel>
+#include <QAbstractTableModel>
 
-class GenericListModel : public QAbstractListModel
+class GenericTableModel : public QAbstractTableModel
 {
 public:
-    GenericListModel(QObject *parent = nullptr);
+    GenericTableModel(QObject *parent = nullptr);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
@@ -57,4 +57,4 @@ private:
     QVector<Property *> m_properties; // contains all properties in the model
 };
 
-#endif // GENERICLISTMODEL_H
+#endif // GENERICTABLEMODEL_H

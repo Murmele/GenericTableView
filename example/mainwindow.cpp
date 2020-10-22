@@ -5,9 +5,9 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
-#include "../lib/genericlistdelegator.h"
-#include "../lib/genericlistmodel.h"
-#include "../lib/genericlistview.h"
+#include "../lib/generictabledelegator.h"
+#include "../lib/generictablemodel.h"
+#include "../lib/generictableview.h"
 
 #include "../lib/Widgets/propertyselectionspinbox.h"
 
@@ -29,11 +29,11 @@ MainWindow::MainWindow(QWidget *parent)
     mainLayout->addLayout(toolButtons);
     //mainLayout->addItem(new QSpacerItem())
 
-    GenericListView *view = new GenericListView(this);
-    model = new GenericListModel(view);
+    GenericTableView *view = new GenericTableView(this);
+    model = new GenericTableModel(view);
     view->setModel(model);
 
-    view->setItemDelegate(new GenericListDelegator(view));
+    view->setItemDelegate(new GenericTableDelegator(view));
     mainLayout->addWidget(view);
 
     ui->centralwidget->setLayout(mainLayout);

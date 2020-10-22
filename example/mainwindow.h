@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-class GenericListModel;
+class GenericTableModel;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,7 +23,7 @@ public slots:
 
 private:
     Ui::MainWindow *ui{nullptr};
-    GenericListModel *model{nullptr};
+    GenericTableModel *model{nullptr};
     int propertyCounter{0};
 };
 #endif // MAINWINDOW_H

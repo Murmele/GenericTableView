@@ -1,18 +1,18 @@
-#include "genericlistmodel.h"
+#include "generictablemodel.h"
 
-GenericListModel::GenericListModel(QObject *parent) : QAbstractListModel(parent) {}
+GenericTableModel::GenericTableModel(QObject *parent) : QAbstractTableModel(parent) {}
 
-int GenericListModel::rowCount(const QModelIndex &parent) const
+int GenericTableModel::rowCount(const QModelIndex &parent) const
 {
     return m_properties.length();
 }
 
-int GenericListModel::columnCount(const QModelIndex &parent) const
+int GenericTableModel::columnCount(const QModelIndex &parent) const
 {
     return Columns::ColumnCount;
 }
 
-QModelIndex GenericListModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex GenericTableModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (row < 0 || row > rowCount() - 1 || column < 0 || column > columnCount() - 1)
         return QModelIndex();
@@ -20,7 +20,7 @@ QModelIndex GenericListModel::index(int row, int column, const QModelIndex &pare
     return createIndex(row, column, m_properties[row]);
 }
 
-Qt::ItemFlags GenericListModel::flags(const QModelIndex &index) const
+Qt::ItemFlags GenericTableModel::flags(const QModelIndex &index) const
 {
     if (index.isValid())
         return Qt::ItemFlag::NoItemFlags;
@@ -32,7 +32,7 @@ Qt::ItemFlags GenericListModel::flags(const QModelIndex &index) const
     return Qt::ItemFlags(Qt::ItemFlag::ItemIsEnabled | Qt::ItemFlag::ItemIsSelectable);
 }
 
-QVariant GenericListModel::data(const QModelIndex &index, int role) const
+QVariant GenericTableModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
         return QVariant();
@@ -52,7 +52,7 @@ QVariant GenericListModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-bool GenericListModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool GenericTableModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (!index.isValid())
         return false;
@@ -69,7 +69,7 @@ bool GenericListModel::setData(const QModelIndex &index, const QVariant &value, 
     return false;
 }
 
-bool GenericListModel::appendProperty(const Property &property)
+bool GenericTableModel::appendProperty(const Property &property)
 {
     for (Property *p : m_properties) {
         if (p->name == property.name) {
@@ -90,7 +90,7 @@ bool GenericListModel::appendProperty(const Property &property)
     return true;
 }
 
-bool GenericListModel::removeProperty(const Property &property)
+bool GenericTableModel::removeProperty(const Property &property)
 {
     int index = -1;
     for (int i = 0; i < m_properties.length(); i++) {
@@ -103,7 +103,7 @@ bool GenericListModel::removeProperty(const Property &property)
     return removeProperty(index);
 }
 
-bool GenericListModel::removeProperty(const QString &propertyname)
+bool GenericTableModel::removeProperty(const QString &propertyname)
 {
     int index = -1;
     for (int i = 0; i < m_properties.length(); i++) {
@@ -116,7 +116,7 @@ bool GenericListModel::removeProperty(const QString &propertyname)
     return removeProperty(index);
 }
 
-bool GenericListModel::removeProperty(const int &index)
+bool GenericTableModel::removeProperty(const int &index)
 {
     if (index < 0)
         return false;
@@ -135,7 +135,7 @@ bool GenericListModel::removeProperty(const int &index)
     return true;
 }
 
-bool GenericListModel::updateProperty(const Property property)
+bool GenericTableModel::updateProperty(const Property property)
 {
     for (int i = 0; i < m_properties.length(); i++) {
         if (m_properties[i]->name == property.name) {

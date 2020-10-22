@@ -17,18 +17,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     ../lib/Widgets/propertyselectionspinbox.cpp \
-    ../lib/genericlistdelegator.cpp \
-    ../lib/genericlistmodel.cpp \
-    ../lib/genericlistview.cpp \
+    ../lib/generictabledelegator.cpp \
+    ../lib/generictablemodel.cpp \
+    ../lib/generictableview.cpp \
     ../lib/property.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     ../lib/Widgets/propertyselectionspinbox.h \
-    ../lib/genericlistdelegator.h \
-    ../lib/genericlistmodel.h \
-    ../lib/genericlistview.h \
+    ../lib/generictabledelegator.h \
+    ../lib/generictablemodel.h \
+    ../lib/generictableview.h \
     ../lib/property.h \
     mainwindow.h
 

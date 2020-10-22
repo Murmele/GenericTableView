@@ -1,15 +1,15 @@
-#ifndef GENERICLISTDELEGATOR_H
-#define GENERICLISTDELEGATOR_H
+#ifndef GENERICTABLEDELEGATOR_H
+#define GENERICTABLEDELEGATOR_H
 
 #include <QStyledItemDelegate>
 
-class GenericListDelegator : public QStyledItemDelegate
+class GenericTableDelegator : public QStyledItemDelegate
 {
 public:
-    GenericListDelegator(QObject *parent = nullptr);
+    GenericTableDelegator(QObject *parent = nullptr);
     QWidget *createEditor(QWidget *parent,
                           const QStyleOptionViewItem &option,
                           const QModelIndex &index) const override;
 };
 
-#endif // GENERICLISTDELEGATOR_H
+#endif // GENERICTABLEDELEGATOR_H
