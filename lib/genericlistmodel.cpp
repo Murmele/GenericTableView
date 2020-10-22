@@ -73,7 +73,7 @@ bool GenericListModel::appendProperty(const Property &property)
     m_properties.append(new Property(property));
     endInsertRows();
 
-    QModelIndex idx = createIndex(first, 2, m_properties[m_properties.length() - 1]);
+    QModelIndex idx = createIndex(first, Columns::Value, m_properties[m_properties.length() - 1]);
     setData(idx, property.value());
 
     return true;
@@ -108,6 +108,9 @@ bool GenericListModel::removeProperty(const QString &propertyname)
 bool GenericListModel::removeProperty(const int &index)
 {
     if (index < 0)
+        return false;
+
+    if (index >= m_properties.length())
         return false;
 
     int first = index;
