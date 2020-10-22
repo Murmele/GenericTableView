@@ -20,6 +20,18 @@ QModelIndex GenericListModel::index(int row, int column, const QModelIndex &pare
     return createIndex(row, column, m_properties[row]);
 }
 
+Qt::ItemFlags GenericListModel::flags(const QModelIndex &index) const
+{
+    if (index.isValid())
+        return Qt::ItemFlag::NoItemFlags;
+
+    if (index.column() == Columns::Value) {
+        return Qt::ItemFlag::ItemIsEditable;
+    }
+
+    return Qt::ItemFlags(Qt::ItemFlag::ItemIsEnabled | Qt::ItemFlag::ItemIsSelectable);
+}
+
 QVariant GenericListModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
