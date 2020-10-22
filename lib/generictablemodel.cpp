@@ -4,11 +4,13 @@ GenericTableModel::GenericTableModel(QObject *parent) : QAbstractTableModel(pare
 
 int GenericTableModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent)
     return m_properties.length();
 }
 
 int GenericTableModel::columnCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent)
     return Columns::ColumnCount;
 }
 
@@ -25,6 +27,7 @@ QVariant GenericTableModel::headerData(int section, Qt::Orientation orientation,
 
 QModelIndex GenericTableModel::index(int row, int column, const QModelIndex &parent) const
 {
+    Q_UNUSED(parent)
     if (row < 0 || row > rowCount() - 1 || column < 0 || column > columnCount() - 1)
         return QModelIndex();
 
@@ -52,16 +55,13 @@ bool GenericTableModel::setHeader(QStringList &header)
     m_header = header;
 
     emit headerDataChanged(Qt::Orientation::Horizontal, 0, m_header.length() - 1);
+    return true;
 }
 
 QVariant GenericTableModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
         return QVariant();
-
-    int column = index.column();
-    if (column != 0)
-        int stop = 1;
 
     Property *p = static_cast<Property *>(index.internalPointer());
 

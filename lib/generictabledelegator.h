@@ -26,9 +26,17 @@ public:
      * \param index
      */
     void destroyEditor(QWidget *editor, const QModelIndex &index) const override;
+    /*!
+     * \brief setEditorData
+     * Set the editor data.
+     * Called when the model parameter changed or the editor was created
+     * \param editor
+     * \param index
+     */
     void setEditorData(QWidget *editor, const QModelIndex &index) const override;
     /*!
      * \brief setModelData
+     * Set editor data to model
      * Called from the view when editing is finished and the editor content must be 
      * set in the model
      * \param editor

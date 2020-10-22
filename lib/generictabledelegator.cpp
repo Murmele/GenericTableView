@@ -9,6 +9,7 @@ QWidget *GenericTableDelegator::createEditor(QWidget *parent,
                                             const QStyleOptionViewItem &option,
                                             const QModelIndex &index) const
 {
+    Q_UNUSED(option)
     if (index.column() == GenericTableModel::Columns::Description)
         return nullptr;
     else if (index.column() == GenericTableModel::Columns::Value) {
@@ -35,6 +36,7 @@ void GenericTableDelegator::destroyEditor(QWidget *editor, const QModelIndex &in
 // model --> editor
 void GenericTableDelegator::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
+    Q_UNUSED(editor)
     if (!index.isValid())
         return;
 
@@ -49,6 +51,8 @@ void GenericTableDelegator::setModelData(QWidget *editor,
                                          QAbstractItemModel *model,
                                          const QModelIndex &index) const
 {
+    Q_UNUSED(editor)
+
     if (!index.isValid())
         return;
 

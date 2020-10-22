@@ -23,6 +23,7 @@ QVariant PropertyselectionCombobox::value() const
 bool PropertyselectionCombobox::setWidgetValue(const QVariant &value)
 {
     m_cb->setCurrentText(value.toString());
+    return true;
 }
 
 QVariant PropertyselectionCombobox::widgetValue() const
