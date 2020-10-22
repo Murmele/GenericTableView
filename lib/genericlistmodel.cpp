@@ -9,7 +9,6 @@ int GenericListModel::rowCount(const QModelIndex &parent) const
 
 int GenericListModel::columnCount(const QModelIndex &parent) const
 {
-    int count = Columns::ColumnCount;
     return Columns::ColumnCount;
 }
 
