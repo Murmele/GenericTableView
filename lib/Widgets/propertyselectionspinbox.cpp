@@ -1,10 +1,8 @@
 #include "propertyselectionspinbox.h"
 
 PropertySelectionSpinBox::PropertySelectionSpinBox(QWidget *parent)
-    : PropertySelectionWidget(), QSpinBox(parent)
-{
-  
-}
+    : PropertySelectionWidget(), m_sb(new QSpinBox(parent))
+{}
 
 PropertySelectionWidget::Type PropertySelectionSpinBox::type() const
 {
@@ -16,12 +14,12 @@ bool PropertySelectionSpinBox::setValue(const QVariant &value)
     bool ok = false;
     int val = value.toInt(&ok);
     if (ok) {
-        QSpinBox::setValue(val);
+        m_sb->setValue(val);
         return true;
     }
     return false;
 }
 QVariant PropertySelectionSpinBox::value() const
 {
-    return QSpinBox::value();
+    return m_sb->value();
 }

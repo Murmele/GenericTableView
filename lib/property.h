@@ -10,10 +10,10 @@
  * Base class for the widgets in the property
  * Inherit from this class to create your own widgets
  */
-class PropertySelectionWidget : public QWidget
+class PropertySelectionWidget
 {
 public:
-    PropertySelectionWidget(QWidget *parent = nullptr) : QWidget(parent){};
+    PropertySelectionWidget(){};
 
     enum class Type {
         SpinBox, // derive from SpinBoxSelectionWidgetProperties
@@ -23,6 +23,7 @@ public:
     virtual Type type() const = 0;
     virtual bool setValue(const QVariant &value) = 0;
     virtual QVariant value() const = 0;
+    virtual QWidget *widget() const = 0;
 };
 
 struct Property
@@ -33,7 +34,6 @@ struct Property
     {
         if (!widget)
             return false;
-        return widget->setValue(value);
     }
     QVariant value() const
     {
