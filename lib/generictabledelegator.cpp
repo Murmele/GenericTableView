@@ -34,12 +34,13 @@ void GenericTableDelegator::destroyEditor(QWidget *editor, const QModelIndex &in
 
 void GenericTableDelegator::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
+    // Works, but not needed, because the data of the editor is the same as the data for the model
     //    if (!index.isValid())
     //        return;
 
     //    QVariant val = index.model()->data(index, Qt::EditRole);
 
-    //    PropertySelectionWidget *p = static_cast<PropertySelectionWidget *>(index.internalPointer());
+    //    Property *p = static_cast<Property *>(index.internalPointer());
     //    p->setValue(val);
 }
 
