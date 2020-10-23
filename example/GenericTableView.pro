@@ -16,10 +16,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    ../lib/Widgets/propertyselectioncombobox.cpp \
-    ../lib/Widgets/propertyselectiondoublespinbox.cpp \
-    ../lib/Widgets/propertyselectionlineedit.cpp \
-    ../lib/Widgets/propertyselectionspinbox.cpp \
+    ../lib/Wrapper/propertyselectioncombobox.cpp \
+    ../lib/Wrapper/propertyselectiondoublespinbox.cpp \
+    ../lib/Wrapper/propertyselectionlineedit.cpp \
+    ../lib/Wrapper/propertyselectionspinbox.cpp \
     ../lib/generictabledelegator.cpp \
     ../lib/generictablemodel.cpp \
     ../lib/generictableview.cpp \
@@ -28,10 +28,10 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
-    ../lib/Widgets/propertyselectioncombobox.h \
-    ../lib/Widgets/propertyselectiondoublespinbox.h \
-    ../lib/Widgets/propertyselectionlineedit.h \
-    ../lib/Widgets/propertyselectionspinbox.h \
+    ../lib/Wrapper/propertyselectioncombobox.h \
+    ../lib/Wrapper/propertyselectiondoublespinbox.h \
+    ../lib/Wrapper/propertyselectionlineedit.h \
+    ../lib/Wrapper/propertyselectionspinbox.h \
     ../lib/generictabledelegator.h \
     ../lib/generictablemodel.h \
     ../lib/generictableview.h \

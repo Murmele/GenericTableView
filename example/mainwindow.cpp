@@ -11,10 +11,10 @@
 #include "../lib/generictablemodel.h"
 #include "../lib/generictableview.h"
 
-#include "../lib/Widgets/propertyselectioncombobox.h"
-#include "../lib/Widgets/propertyselectiondoublespinbox.h"
-#include "../lib/Widgets/propertyselectionlineedit.h"
-#include "../lib/Widgets/propertyselectionspinbox.h"
+#include "../lib/Wrapper/propertyselectioncombobox.h"
+#include "../lib/Wrapper/propertyselectiondoublespinbox.h"
+#include "../lib/Wrapper/propertyselectionlineedit.h"
+#include "../lib/Wrapper/propertyselectionspinbox.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
