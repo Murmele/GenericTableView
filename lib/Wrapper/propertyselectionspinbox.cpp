@@ -4,11 +4,6 @@ PropertySelectionSpinBox::PropertySelectionSpinBox(QWidget *parent)
     : PropertySelectionWrapper(), m_sb(new QSpinBox(parent))
 {}
 
-//PropertySelectionWrapper::Type PropertySelectionSpinBox::type() const
-//{
-//    return PropertySelectionWrapper::Type::SpinBox;
-//}
-
 bool PropertySelectionSpinBox::setWidgetValue(const QVariant &value)
 {
     bool ok = false;

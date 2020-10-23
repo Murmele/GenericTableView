@@ -4,11 +4,6 @@ PropertySelectionDoubleSpinBox::PropertySelectionDoubleSpinBox(QWidget *parent)
     : PropertySelectionWrapper(), m_sb(new QDoubleSpinBox(parent))
 {}
 
-//PropertySelectionWrapper::Type PropertySelectionDoubleSpinBox::type() const
-//{
-//    return PropertySelectionWrapper::Type::SpinBox;
-//}
-
 bool PropertySelectionDoubleSpinBox::setWidgetValue(const QVariant &value)
 {
     bool ok = false;

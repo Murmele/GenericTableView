@@ -4,11 +4,6 @@ PropertyselectionCombobox::PropertyselectionCombobox(QWidget *parent)
     : PropertySelectionWrapper(), m_cb(new QComboBox(parent))
 {}
 
-//PropertySelectionWrapper::Type PropertyselectionCombobox::type() const
-//{
-//    return PropertySelectionWrapper::Type::ComboBox;
-//}
-
 bool PropertyselectionCombobox::setWidgetValue(const QVariant &value)
 {
     m_cb->setCurrentText(value.toString());

@@ -4,11 +4,6 @@ PropertySelectionLineEdit::PropertySelectionLineEdit(QWidget *parent)
     : PropertySelectionWrapper(), m_le(new QLineEdit(parent))
 {}
 
-//PropertySelectionWrapper::Type PropertySelectionLineEdit::type() const
-//{
-//    return PropertySelectionWrapper::Type::LineEdit;
-//}
-
 bool PropertySelectionLineEdit::setWidgetValue(const QVariant &value)
 {
     m_le->setText(value.toString());

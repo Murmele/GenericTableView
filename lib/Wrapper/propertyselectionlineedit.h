@@ -10,7 +10,6 @@ class PropertySelectionLineEdit : public PropertySelectionWrapper
 public:
     PropertySelectionLineEdit(QWidget *parent = nullptr);
 
-    //    virtual Type type() const override;
     virtual bool setWidgetValue(const QVariant &value) override;
     virtual QVariant widgetValue() const override;
     virtual QWidget *widget() const override { return m_le; }
