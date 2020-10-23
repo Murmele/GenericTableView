@@ -18,8 +18,7 @@ public:
     ~MainWindow();
 
 public slots:
-    void addSBProperty();
-    void addCBProperty();
+    void addProperty();
     void removeProperty();
 
 private:
