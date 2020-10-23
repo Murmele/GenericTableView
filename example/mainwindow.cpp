@@ -58,7 +58,7 @@ void MainWindow::addSBProperty()
     Property p;
     p.m_name = "Property " + QString::number(propertyCounter);
     // the spinbox can also be reused
-    p.widget = new PropertySelectionSpinBox(this);
+    p.widget = QSharedPointer<PropertySelectionWidget>(new PropertySelectionSpinBox(this));
     model->appendProperty(p);
     propertyCounter++;
 }
@@ -68,7 +68,7 @@ void MainWindow::addCBProperty()
     Property p;
     p.m_name = "Property " + QString::number(propertyCounter);
     // the spinbox can also be reused
-    p.widget = new PropertyselectionCombobox(this);
+    p.widget = QSharedPointer<PropertySelectionWidget>(new PropertyselectionCombobox(this));
     QComboBox *cb = static_cast<QComboBox *>(p.widget->widget());
     cb->addItems({"Test1", "Test2"});
     model->appendProperty(p, "Test3");

@@ -92,7 +92,7 @@ struct Property
     QVariant m_value;
     // PropertySelectionWidget contains a Widget with all possible widgets which can be used for changing the value, for example spinbox, font selection, combobox, ....
     // TODO: use smartpointer!
-    PropertySelectionWidget *widget{nullptr};
+    QSharedPointer<PropertySelectionWidget> widget{nullptr};
 };
 
 #endif // PROPERTY_H
