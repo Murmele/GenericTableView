@@ -75,13 +75,27 @@ public:
              QSharedPointer<PropertySelectionWrapper> widget = nullptr);
     Property(const Property &p);
 
-    bool setValue(const QVariant &value)
-    {
-        m_value = value;
-        return true;
-    }
+    /*!
+     * \brief setValue
+     * Sets the value of the property
+     * \param value
+     */
+    void setValue(const QVariant &value) { m_value = value; }
 
+    /*!
+     * \brief value
+     * Returns the current value of the property
+     * \return 
+     */
     QVariant value() const { return m_value; }
+
+    /*!
+     * \brief widget
+     * Access the widget inside the wrapper. This can be used
+     * to set specific properties to the widget. For example
+     * minimum and maximum in a spinbox
+     * \return 
+     */
     QWidget *widget() { return wrapper->widget(); }
 
     // desired to be public
@@ -112,7 +126,12 @@ public:
      * Value of the property is stored in this variable
      */
     QVariant m_value;
-    // PropertySelectionWrapper contains a Widget with all possible widgets which can be used for changing the value, for example spinbox, font selection, combobox, ....
+    /*!
+     * \brief wrapper
+     * This is a wrapper for different widgets to get a common interface.
+     * Contains a Widget with all possible widgets which can be used for changing the value, 
+     * for example spinbox, font selection, combobox, ....
+     */
     QSharedPointer<PropertySelectionWrapper> wrapper{nullptr};
 };
 
