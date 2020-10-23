@@ -5,7 +5,7 @@
 
 #include <QComboBox>
 
-class PropertyselectionCombobox : public PropertySelectionWidget
+class PropertyselectionCombobox : public PropertySelectionWrapper
 {
 public:
     PropertyselectionCombobox(QWidget *parent = nullptr);

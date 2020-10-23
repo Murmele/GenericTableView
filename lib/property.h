@@ -10,10 +10,10 @@
  * Base class for the widgets in the property
  * Inherit from this class to create your own widgets
  */
-class PropertySelectionWidget
+class PropertySelectionWrapper
 {
 public:
-    PropertySelectionWidget(){};
+    PropertySelectionWrapper(){};
 
     //    enum class Type {
     //        SpinBox, // derive from SpinBoxSelectionWidgetProperties
@@ -72,7 +72,7 @@ public:
     Property();
     Property(QString name,
              QString datatype,
-             QSharedPointer<PropertySelectionWidget> widget = nullptr);
+             QSharedPointer<PropertySelectionWrapper> widget = nullptr);
     Property(const Property &p);
 
     bool setValue(const QVariant &value)
@@ -82,6 +82,7 @@ public:
     }
 
     QVariant value() const { return m_value; }
+    QWidget *widget() { return wrapper->widget(); }
 
     // desired to be public
 public:
@@ -111,8 +112,8 @@ public:
      * Value of the property is stored in this variable
      */
     QVariant m_value;
-    // PropertySelectionWidget contains a Widget with all possible widgets which can be used for changing the value, for example spinbox, font selection, combobox, ....
-    QSharedPointer<PropertySelectionWidget> widget{nullptr};
+    // PropertySelectionWrapper contains a Widget with all possible widgets which can be used for changing the value, for example spinbox, font selection, combobox, ....
+    QSharedPointer<PropertySelectionWrapper> wrapper{nullptr};
 };
 
 #endif // PROPERTY_H

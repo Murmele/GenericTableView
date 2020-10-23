@@ -82,20 +82,21 @@ void MainWindow::addProperty()
 
     Property p(name, datatype);
     if (datatype == "Text") {
-        p.widget = QSharedPointer<PropertySelectionWidget>(new PropertySelectionLineEdit(this));
+        p.wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertySelectionLineEdit(this));
 
     } else if (datatype == "Integer") {
-        p.widget = QSharedPointer<PropertySelectionWidget>(new PropertySelectionSpinBox(this));
+        p.wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertySelectionSpinBox(this));
         // Set initial value
         // Also ranges and whatever you want can be done here
-        static_cast<QSpinBox *>(p.widget->widget())->setValue(10);
+        static_cast<QSpinBox *>(p.widget())->setValue(10);
 
     } else if (datatype == "Double") {
-        p.widget = QSharedPointer<PropertySelectionWidget>(new PropertySelectionDoubleSpinBox(this));
+        p.wrapper = QSharedPointer<PropertySelectionWrapper>(
+            new PropertySelectionDoubleSpinBox(this));
     } else if (datatype == "Selection") {
-        p.widget = QSharedPointer<PropertySelectionWidget>(new PropertyselectionCombobox(this));
+        p.wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertyselectionCombobox(this));
         // set items in the combobox
-        QComboBox *cb = static_cast<QComboBox *>(p.widget->widget());
+        QComboBox *cb = static_cast<QComboBox *>(p.widget());
         cb->addItems({"Test1", "Test2"});
     }
 

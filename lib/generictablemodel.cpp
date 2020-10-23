@@ -109,12 +109,12 @@ bool GenericTableModel::appendProperty(const Property &property, const QVariant 
     QModelIndex idx = createIndex(first, Columns::Value, m_properties[m_properties.length() - 1]);
     if (initialValue.isValid()) {
         // check if valid value
-        if (property.widget->validValue(initialValue))
+        if (property.wrapper->validValue(initialValue))
             setData(idx, initialValue);
         else // set default valid value
-            setData(idx, property.widget->initialValue());
+            setData(idx, property.wrapper->initialValue());
     } else
-        setData(idx, property.widget->widgetValue());
+        setData(idx, property.wrapper->widgetValue());
 
     return true;
 }

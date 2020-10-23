@@ -15,8 +15,8 @@ QWidget *GenericTableDelegator::createEditor(QWidget *parent,
     else if (index.column() == GenericTableModel::Columns::Value) {
         Property *p = static_cast<Property *>(index.internalPointer());
         //Only possible when widget gets not destroyed in destroy Editor
-        if (p->widget) {
-            QWidget *w = p->widget->widget();
+        if (p->wrapper) { // the widget it self is not a smartpointer, but the
+            QWidget *w = p->widget();
             w->setParent(parent);
             return w;
         }
@@ -45,8 +45,8 @@ void GenericTableDelegator::setEditorData(QWidget *editor, const QModelIndex &in
     QVariant val = index.model()->data(index, Qt::EditRole);
 
     Property *p = static_cast<Property *>(index.internalPointer());
-    if (p->widget) // because the widget might already be deleted outside
-        p->widget->setWidgetValue(val);
+    if (p->wrapper) // because the widget might already be deleted outside
+        p->wrapper->setWidgetValue(val);
 }
 
 // editor --> model
@@ -60,10 +60,10 @@ void GenericTableDelegator::setModelData(QWidget *editor,
         return;
 
     Property *p = static_cast<Property *>(index.internalPointer());
-    if (!p->widget)
+    if (!p->wrapper)
         return;
 
-    QVariant value = p->widget->widgetValue();
+    QVariant value = p->wrapper->widgetValue();
     model->setData(index, value, Qt::EditRole);
 }
 

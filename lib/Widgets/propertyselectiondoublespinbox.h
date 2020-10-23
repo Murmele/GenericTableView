@@ -5,7 +5,7 @@
 
 #include <QDoubleSpinBox>
 
-class PropertySelectionDoubleSpinBox: public PropertySelectionWidget
+class PropertySelectionDoubleSpinBox : public PropertySelectionWrapper
 {
 public:  
     PropertySelectionDoubleSpinBox(QWidget *parent = nullptr);

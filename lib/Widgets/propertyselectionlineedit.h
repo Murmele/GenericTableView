@@ -5,7 +5,7 @@
 
 #include <QLineEdit>
 
-class PropertySelectionLineEdit : public PropertySelectionWidget
+class PropertySelectionLineEdit : public PropertySelectionWrapper
 {
 public:
     PropertySelectionLineEdit(QWidget *parent = nullptr);

@@ -4,7 +4,7 @@
 #include "../property.h"
 #include <QSpinBox>
 
-class PropertySelectionSpinBox : public PropertySelectionWidget
+class PropertySelectionSpinBox : public PropertySelectionWrapper
 {
 
 public:

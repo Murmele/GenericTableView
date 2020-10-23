@@ -1,12 +1,12 @@
 #include "propertyselectionlineedit.h"
 
 PropertySelectionLineEdit::PropertySelectionLineEdit(QWidget *parent)
-    : PropertySelectionWidget(), m_le(new QLineEdit(parent))
+    : PropertySelectionWrapper(), m_le(new QLineEdit(parent))
 {}
 
-//PropertySelectionWidget::Type PropertySelectionLineEdit::type() const
+//PropertySelectionWrapper::Type PropertySelectionLineEdit::type() const
 //{
-//    return PropertySelectionWidget::Type::LineEdit;
+//    return PropertySelectionWrapper::Type::LineEdit;
 //}
 
 bool PropertySelectionLineEdit::setWidgetValue(const QVariant &value)
