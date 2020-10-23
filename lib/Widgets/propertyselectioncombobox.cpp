@@ -4,10 +4,10 @@ PropertyselectionCombobox::PropertyselectionCombobox(QWidget *parent)
     : PropertySelectionWidget(), m_cb(new QComboBox(parent))
 {}
 
-PropertySelectionWidget::Type PropertyselectionCombobox::type() const
-{
-    return PropertySelectionWidget::Type::ComboBox;
-}
+//PropertySelectionWidget::Type PropertyselectionCombobox::type() const
+//{
+//    return PropertySelectionWidget::Type::ComboBox;
+//}
 
 bool PropertyselectionCombobox::setWidgetValue(const QVariant &value)
 {

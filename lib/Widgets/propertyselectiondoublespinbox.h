@@ -10,7 +10,7 @@ class PropertySelectionDoubleSpinBox: public PropertySelectionWidget
 public:  
     PropertySelectionDoubleSpinBox(QWidget *parent = nullptr);
 
-    virtual Type type() const override;
+    //    virtual Type type() const override;
     virtual bool setWidgetValue(const QVariant &value) override;
     virtual QVariant widgetValue() const override;
     virtual QWidget *widget() const override { return m_sb; }

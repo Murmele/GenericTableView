@@ -15,24 +15,23 @@ class PropertySelectionWidget
 public:
     PropertySelectionWidget(){};
 
-    enum class Type {
-        SpinBox, // derive from SpinBoxSelectionWidgetProperties
-        ComboBox
-    };
+    //    enum class Type {
+    //        SpinBox, // derive from SpinBoxSelectionWidgetProperties
+    //        ComboBox
+    //    };
 
+    //    enum class DataType {
+    //	String,
+    //	Integer,
+    //	Double
+    //    };
 
-//    enum class DataType {
-//	String,
-//	Integer,
-//	Double
-//    };
-
-    /*!
-     * \brief type
-     * Currently not used, because it limits the extendible
-     * \return
-     */
-    virtual Type type() const = 0;
+    //    /*!
+    //     * \brief type
+    //     * Currently not used, because it limits the extendible
+    //     * \return
+    //     */
+    //    virtual Type type() const = 0;
     /*!
      * \brief setWidgetValue
      * Sets the value to the edit widget (Spinbox, Combobox, ...)

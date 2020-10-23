@@ -10,7 +10,7 @@ class PropertyselectionCombobox : public PropertySelectionWidget
 public:
     PropertyselectionCombobox(QWidget *parent = nullptr);
 
-    virtual Type type() const override;
+    //    virtual Type type() const override;
     virtual bool setWidgetValue(const QVariant &value) override;
     virtual QVariant widgetValue() const override;
     virtual bool validValue(const QVariant &value) const override;
