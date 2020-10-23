@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     ../lib/Widgets/propertyselectioncombobox.cpp \
     ../lib/Widgets/propertyselectiondoublespinbox.cpp \
+    ../lib/Widgets/propertyselectionlineedit.cpp \
     ../lib/Widgets/propertyselectionspinbox.cpp \
     ../lib/generictabledelegator.cpp \
     ../lib/generictablemodel.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 HEADERS += \
     ../lib/Widgets/propertyselectioncombobox.h \
     ../lib/Widgets/propertyselectiondoublespinbox.h \
+    ../lib/Widgets/propertyselectionlineedit.h \
     ../lib/Widgets/propertyselectionspinbox.h \
     ../lib/generictabledelegator.h \
     ../lib/generictablemodel.h \
