@@ -11,19 +11,6 @@ public:
     PropertyselectionCombobox(QWidget *parent = nullptr);
 
     virtual Type type() const override;
-    /*!
-     * \brief setValue
-     * Sets the current index of the combobox
-     * \param value
-     * \return 
-     */
-    virtual bool setValue(const QVariant &value) override;
-    /*!
-     * \brief value
-     * Returns the current index of the combobox
-     * \return 
-     */
-    virtual QVariant value() const override;
     virtual bool setWidgetValue(const QVariant &value) override;
     virtual QVariant widgetValue() const override;
     virtual bool validValue(const QVariant &value) const override;
@@ -32,7 +19,6 @@ public:
 
 private:
     QComboBox *m_cb{nullptr};
-    QString m_currentText{""};
 };
 
 #endif // PROPERTYSELECTIONCOMBBOX_H

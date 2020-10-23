@@ -34,19 +34,6 @@ public:
      */
     virtual Type type() const = 0;
     /*!
-     * \brief setValue
-     * Sets the value of the property
-     * \param value
-     * \return
-     */
-    virtual bool setValue(const QVariant &value) = 0;
-    /*!
-     * \brief value
-     * Returns the value of this property
-     * \return
-     */
-    virtual QVariant value() const = 0;
-    /*!
      * \brief setWidgetValue
      * Sets the value to the edit widget (Spinbox, Combobox, ...)
      * \param value
@@ -86,17 +73,12 @@ struct Property
     Property(const Property &p);
     bool setValue(const QVariant &value)
     {
-        if (!widget)
-            return false;
-
-        widget->setValue(value);
+        m_value = value;
         return true;
     }
     QVariant value() const
     {
-        if (!widget)
-            return QVariant();
-        return widget->value();
+        return m_value;
     }
     QString m_name{""}; // Property name
     /*!

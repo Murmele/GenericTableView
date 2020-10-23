@@ -8,22 +8,6 @@ PropertySelectionWidget::Type PropertySelectionSpinBox::type() const
 {
     return PropertySelectionWidget::Type::SpinBox;
 }
-bool PropertySelectionSpinBox::setValue(const QVariant &value)
-{
-    // TODO: needed?
-    bool ok = false;
-    int val = value.toInt(&ok);
-    if (ok) {
-        m_value = val;
-        return true;
-    }
-    return false;
-}
-
-QVariant PropertySelectionSpinBox::value() const
-{
-    return m_value;
-}
 
 bool PropertySelectionSpinBox::setWidgetValue(const QVariant &value)
 {
