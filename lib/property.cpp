@@ -4,7 +4,7 @@ Property::Property() {}
 
 Property::Property(const Property &p)
 {
-    name = p.name;
-    required = p.required;
+    m_name = p.m_name;
+    m_required = p.m_required;
     widget = p.widget;
 }

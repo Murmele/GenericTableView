@@ -56,7 +56,7 @@ MainWindow::~MainWindow()
 void MainWindow::addSBProperty()
 {
     Property p;
-    p.name = "Property " + QString::number(propertyCounter);
+    p.m_name = "Property " + QString::number(propertyCounter);
     // the spinbox can also be reused
     p.widget = new PropertySelectionSpinBox(this);
     model->appendProperty(p);
@@ -66,7 +66,7 @@ void MainWindow::addSBProperty()
 void MainWindow::addCBProperty()
 {
     Property p;
-    p.name = "Property " + QString::number(propertyCounter);
+    p.m_name = "Property " + QString::number(propertyCounter);
     // the spinbox can also be reused
     p.widget = new PropertyselectionCombobox(this);
     QComboBox *cb = static_cast<QComboBox *>(p.widget->widget());

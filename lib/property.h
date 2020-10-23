@@ -20,6 +20,13 @@ public:
         ComboBox
     };
 
+
+//    enum class DataType {
+//	String,
+//	Integer,
+//	Double
+//    };
+
     /*!
      * \brief type
      * Currently not used, because it limits the extendible
@@ -91,8 +98,16 @@ struct Property
             return QVariant();
         return widget->value();
     }
-    QString name{""}; // Property name
-    bool required{false}; // true means, the property cannot be deleted. So deleteProperty() returns false
+    QString m_name{""}; // Property name
+    /*!
+     * \brief m_required
+     */
+    bool m_required{false}; // true means, the property cannot be deleted. So deleteProperty() returns false
+    /*!
+     * \brief m_value
+     * Value of the property is stored in this variable
+     */
+    QVariant m_value;
     // PropertySelectionWidget contains a Widget with all possible widgets which can be used for changing the value, for example spinbox, font selection, combobox, ....
     // TODO: use smartpointer!
     PropertySelectionWidget *widget{nullptr};

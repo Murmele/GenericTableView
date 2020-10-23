@@ -67,7 +67,7 @@ QVariant GenericTableModel::data(const QModelIndex &index, int role) const
 
     if (role == Qt::DisplayRole || role == Qt::EditRole) {
         if (index.column() == Columns::Description)
-            return p->name;
+            return p->m_name;
         else if (index.column() == Columns::Value)
             return p->value();
     }
@@ -94,7 +94,7 @@ bool GenericTableModel::setData(const QModelIndex &index, const QVariant &value,
 bool GenericTableModel::appendProperty(const Property &property, const QVariant initialValue)
 {
     for (Property *p : m_properties) {
-        if (p->name == property.name) {
+        if (p->m_name == property.m_name) {
             return false;
         }
     }
@@ -123,7 +123,7 @@ bool GenericTableModel::removeProperty(const Property &property)
 {
     int index = -1;
     for (int i = 0; i < m_properties.length(); i++) {
-        if (m_properties[i]->name == property.name) {
+        if (m_properties[i]->m_name == property.m_name) {
             index = i;
             break;
         }
@@ -136,7 +136,7 @@ bool GenericTableModel::removeProperty(const QString &propertyname)
 {
     int index = -1;
     for (int i = 0; i < m_properties.length(); i++) {
-        if (m_properties[i]->name == propertyname) {
+        if (m_properties[i]->m_name == propertyname) {
             index = i;
             break;
         }
@@ -153,7 +153,7 @@ bool GenericTableModel::removeProperty(const int &index)
     if (index >= m_properties.length())
         return false;
 
-    if (m_properties[index]->required)
+    if (m_properties[index]->m_required)
         return false; // if the property is required, it is not possible to delete it
 
     int first = index;
@@ -170,7 +170,7 @@ bool GenericTableModel::removeProperty(const int &index)
 bool GenericTableModel::updateProperty(const Property property)
 {
     for (int i = 0; i < m_properties.length(); i++) {
-        if (m_properties[i]->name == property.name) {
+        if (m_properties[i]->m_name == property.m_name) {
             *m_properties[i] = property;
             QModelIndex index = createIndex(i, Columns::Value, m_properties[i]);
             emit dataChanged(index, index, {Qt::DisplayRole});
