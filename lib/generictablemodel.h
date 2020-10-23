@@ -26,6 +26,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
     bool setHeader(QStringList &header);
     QStringList header() { return m_header; }
+    QVector<Property *> properties() { return m_properties; }
 
     enum UserRoles {
         Widget = Qt::UserRole + 1,

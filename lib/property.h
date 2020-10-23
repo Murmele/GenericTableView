@@ -68,22 +68,44 @@ public:
 
 struct Property
 {
+public:
     Property();
+    Property(QString name,
+             QString datatype,
+             QSharedPointer<PropertySelectionWidget> widget = nullptr);
     Property(const Property &p);
+
     bool setValue(const QVariant &value)
     {
         m_value = value;
         return true;
     }
-    QVariant value() const
-    {
-        return m_value;
-    }
-    QString m_name{""}; // Property name
+
+    QVariant value() const { return m_value; }
+
+    // desired to be public
+public:
+    /*!
+     * \brief m_name
+     * Name of the property
+     */
+    QString m_name{""};
+
+    /*!
+     * \brief m_datatype
+     * Datatype of the property. Can be used to convert the QVariant
+     * to the appropriate datatype. It lies in the programmers hand to convert
+     * the value to the appropriate datatype. This variable is just that the programmer
+     * knows the datatype the property has.
+     * 
+     */
+    QString m_datatype;
+
     /*!
      * \brief m_required
+     * true means, the property cannot be deleted. So deleteProperty() returns false
      */
-    bool m_required{false}; // true means, the property cannot be deleted. So deleteProperty() returns false
+    bool m_required{false};
     /*!
      * \brief m_value
      * Value of the property is stored in this variable
