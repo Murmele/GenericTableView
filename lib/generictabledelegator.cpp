@@ -15,7 +15,7 @@ QWidget *GenericTableDelegator::createEditor(QWidget *parent,
     else if (index.column() == GenericTableModel::Columns::Value) {
         Property *p = static_cast<Property *>(index.internalPointer());
         //Only possible when widget gets not destroyed in destroy Editor
-        if (p->wrapper) { // the widget it self is not a smartpointer, but the
+        if (p->wrapper) { // the widget it self is not a smartpointer, but the wrapper
             QWidget *w = p->widget();
             w->setParent(parent);
             return w;

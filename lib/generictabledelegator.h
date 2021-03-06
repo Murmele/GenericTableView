@@ -10,6 +10,7 @@ public:
     /*!
      * \brief createEditor
      * Called by the view when a cell goes into edit mode
+	 * Returns the corresponding widget to edit the selected property
      * \param parent
      * \param option
      * \param index

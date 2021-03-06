@@ -16,6 +16,42 @@
 #include "../lib/Wrapper/propertyselectionlineedit.h"
 #include "../lib/Wrapper/propertyselectionspinbox.h"
 
+namespace  {
+    /*!
+     * \brief The PropertyDialog class
+     * Simple dialog to select the datatype and the name of the property
+     */
+    class PropertyDialog: public QDialog
+    {
+    public:
+        PropertyDialog(QWidget *parent = nullptr): QDialog(parent) {
+            QVBoxLayout* layout = new QVBoxLayout();
+
+            cb = new QComboBox(this);
+            cb->addItems({"Text", "Integer", "Double", "Selection"});
+            layout->addWidget(cb);
+
+            le = new QLineEdit("Property name", this);
+            layout->addWidget(le);
+
+            QPushButton* btn = new QPushButton("OK");
+            layout->addWidget(btn);
+
+            // capture a reference (&)
+            connect(btn, &QPushButton::clicked, [&] { this->accept(); });
+
+            this->setLayout(layout);
+        };
+
+        QString name() {return le->text();}
+        QString datatype() {return cb->currentText();}
+
+    private:
+        QLineEdit* le;
+        QComboBox* cb;
+    };
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
       , ui(new Ui::MainWindow)
@@ -24,16 +60,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
 
-    QHBoxLayout *toolButtons
-        = new QHBoxLayout(); // for adding tool buttons like adding/removing properties
+    QHBoxLayout *toolButtons = new QHBoxLayout(); // for adding tool buttons like adding/removing properties
     QPushButton *add = new QPushButton("Add", this);
     toolButtons->addWidget(add);
     QPushButton *remove = new QPushButton("remove", this);
     toolButtons->addWidget(remove);
+    connect(add, &QPushButton::clicked, this, &MainWindow::addProperty);
+    connect(remove, &QPushButton::clicked, this, &MainWindow::removeProperty);
 
     mainLayout->addLayout(toolButtons);
-    //mainLayout->addItem(new QSpacerItem())
 
+    // Create new GenericTableView and the model.
     GenericTableView *view = new GenericTableView(this);
     model = new GenericTableModel(view);
     QStringList header = {"Name", "Value"};
@@ -44,9 +81,6 @@ MainWindow::MainWindow(QWidget *parent)
     mainLayout->addWidget(view);
 
     ui->centralwidget->setLayout(mainLayout);
-
-    connect(add, &QPushButton::clicked, this, &MainWindow::addProperty);
-    connect(remove, &QPushButton::clicked, this, &MainWindow::removeProperty);
 }
 
 MainWindow::~MainWindow()
@@ -54,31 +88,19 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+/*!
+ * \brief MainWindow::addProperty
+ * Opens a dialog to create a new property.
+ * After the property was selected, the corresponding wrapper will be created. This wrapper is used to
+ * modify the value afterwards
+ */
 void MainWindow::addProperty()
 {
-    QDialog dialog(this);
-
-    QVBoxLayout* layout = new QVBoxLayout();
-
-    QComboBox* cb = new QComboBox(&dialog);
-    cb->addItems({"Text", "Integer", "Double", "Selection"});
-    layout->addWidget(cb);
-
-    QLineEdit* le = new QLineEdit("Property name", &dialog);
-    layout->addWidget(le);
-
-    QPushButton* btn = new QPushButton("OK");
-    layout->addWidget(btn);
-
-    // capture a reference (&)
-    connect(btn, &QPushButton::clicked, [&] { dialog.accept(); });
-
-    dialog.setLayout(layout);
-
+    PropertyDialog dialog(this);
     dialog.exec();
-
-    QString name = le->text();
-    QString datatype = cb->currentText();
+    // Get name and datatype from the dialog
+    QString name = dialog.name();
+    QString datatype = dialog.datatype();
 
     Property p(name, datatype);
     if (datatype == "Text") {

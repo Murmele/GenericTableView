@@ -81,11 +81,9 @@ bool GenericTableModel::setData(const QModelIndex &index, const QVariant &value,
 
     Property *p = static_cast<Property *>(index.internalPointer());
     if (p) {
-        bool success = p->setValue(value);
-        if (success) {
-            emit dataChanged(index, index, {role});
-            return true;
-        }
+        p->setValue(value);
+        emit dataChanged(index, index, {role});
+        return true;
     }
 
     return false;

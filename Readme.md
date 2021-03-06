@@ -19,5 +19,14 @@ If you would like to use different widget to modify the properties, derive your 
 ## Important
 There is no check if the datatype is compatible with the widget! If you assign a value which datatype is not compatible with the widget, the value will not be set to the widget and you will not see any changes.
 
+## Screenshot
+Add a new property by selecting one of your datatypes and the property name. Datatypes can be defined by your own.
+![alt text](https://github.com/Murmele/GenericTableView/blob/master/screenshots/AddProperty.png)
+Selection of the datatype
+![alt text](https://github.com/Murmele/GenericTableView/blob/master/screenshots/SelectDatatype.png)
+Modify the value of the property with your custom widget
+![alt text](https://github.com/Murmele/GenericTableView/blob/master/screenshots/ModifyValue.png)
+
+
 ## TODO:
 
