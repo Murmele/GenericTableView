@@ -181,7 +181,10 @@ bool GenericTableModel::removeProperties(const int startIndex, const int endInde
 
 void GenericTableModel::clear()
 {
-    assert(removeProperties(0, m_properties.length()) == true);
+    if (m_properties.length() == 0)
+        return;
+
+    assert(removeProperties(0, m_properties.length() - 1) == true);
 }
 
 bool GenericTableModel::updateProperty(const Property property)
