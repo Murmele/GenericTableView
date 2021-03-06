@@ -20,6 +20,7 @@ public:
 public slots:
     void addProperty();
     void removeProperty();
+    void removeAll();
 
 private:
     Ui::MainWindow *ui{nullptr};

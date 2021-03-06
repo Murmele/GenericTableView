@@ -45,6 +45,19 @@ public:
     bool removeProperty(const QString &propertyname);
     bool removeProperty(const int &index);
     /*!
+     * \brief removeProperties
+     * Remove multiple properties at the same time. \p endIndex is the last index which will be removed
+     * \param startIndex
+     * \param endIndex
+     * \return
+     */
+    bool removeProperties(const int startIndex, const int endIndex);
+    /*!
+     * \brief clear
+     * Remove all properties
+     */
+    void clear();
+    /*!
      * \brief updateProperty
      * Replace the property in m_properties by property if the name matches
      * \param propertyname

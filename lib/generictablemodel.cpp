@@ -145,24 +145,43 @@ bool GenericTableModel::removeProperty(const QString &propertyname)
 
 bool GenericTableModel::removeProperty(const int &index)
 {
-    if (index < 0)
+    return removeProperties(index, index);
+}
+
+bool GenericTableModel::removeProperties(const int startIndex, const int endIndex)
+{
+    if (startIndex < 0 || endIndex < 0)
         return false;
 
-    if (index >= m_properties.length())
+    if (startIndex > endIndex)
         return false;
 
-    if (m_properties[index]->m_required)
-        return false; // if the property is required, it is not possible to delete it
+    if (startIndex >= m_properties.length() || endIndex >= m_properties.length())
+        return false;
 
-    int first = index;
-    int last = index;
+    for (int i = startIndex; i <= endIndex; i++)
+    {
+        if (m_properties[i]->m_required)
+            return false; // if the property is required, it is not possible to delete it
+    }
+
+    int first = startIndex;
+    int last = endIndex;
     beginRemoveRows(QModelIndex(), first, last);
-    // TODO: check if the parameters are removed correctly
-    delete m_properties[index];
-    m_properties.remove(index);
+    for (int i = startIndex; i <= endIndex; i++)
+    {
+        // TODO: check if the parameters are removed correctly
+        delete m_properties[i];
+        m_properties.remove(i);
+    }
     endRemoveRows();
 
     return true;
+}
+
+void GenericTableModel::clear()
+{
+    assert(removeProperties(0, m_properties.length()) == true);
 }
 
 bool GenericTableModel::updateProperty(const Property property)

@@ -65,8 +65,11 @@ MainWindow::MainWindow(QWidget *parent)
     toolButtons->addWidget(add);
     QPushButton *remove = new QPushButton("remove", this);
     toolButtons->addWidget(remove);
+    QPushButton *removeAll = new QPushButton("removeAll", this);
+    toolButtons->addWidget(removeAll);
     connect(add, &QPushButton::clicked, this, &MainWindow::addProperty);
     connect(remove, &QPushButton::clicked, this, &MainWindow::removeProperty);
+    connect(removeAll, &QPushButton::clicked, this, &MainWindow::removeAll);
 
     mainLayout->addLayout(toolButtons);
 
@@ -123,6 +126,12 @@ void MainWindow::addProperty()
     }
 
     model->appendProperty(p);
+}
+
+void MainWindow::removeAll()
+{
+  while(model->removeProperty(0))
+  {}
 }
 
 void MainWindow::removeProperty()
