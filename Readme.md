@@ -21,10 +21,15 @@ There is no check if the datatype is compatible with the widget! If you assign a
 
 ## Screenshot
 Add a new property by selecting one of your datatypes and the property name. Datatypes can be defined by your own.
+
 ![alt text](https://github.com/Murmele/GenericTableView/blob/master/screenshots/AddProperty.png)
+
 Selection of the datatype
+
 ![alt text](https://github.com/Murmele/GenericTableView/blob/master/screenshots/SelectDatatype.png)
+
 Modify the value of the property with your custom widget
+
 ![alt text](https://github.com/Murmele/GenericTableView/blob/master/screenshots/ModifyValue.png)
 
 
