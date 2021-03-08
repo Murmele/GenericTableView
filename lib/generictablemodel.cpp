@@ -1,5 +1,7 @@
 #include "generictablemodel.h"
 
+#include <QDebug>
+
 GenericTableModel::GenericTableModel(QObject *parent) : QAbstractTableModel(parent) {}
 
 int GenericTableModel::rowCount(const QModelIndex &parent) const
@@ -105,14 +107,22 @@ bool GenericTableModel::appendProperty(const Property &property, const QVariant 
     endInsertRows();
 
     QModelIndex idx = createIndex(first, Columns::Value, m_properties[m_properties.length() - 1]);
-    if (initialValue.isValid()) {
-        // check if valid value
-        if (property.wrapper->validValue(initialValue))
-            setData(idx, initialValue);
-        else // set default valid value
-            setData(idx, property.wrapper->initialValue());
-    } else
-        setData(idx, property.wrapper->widgetValue());
+    if (property.wrapper)
+    {
+        if (initialValue.isValid()) {
+            // check if valid value
+            if (property.wrapper->validValue(initialValue))
+                setData(idx, initialValue);
+            else // set default valid value
+                setData(idx, property.wrapper->initialValue());
+        } else
+            setData(idx, property.wrapper->widgetValue());
+    }
+    else
+    {
+        qDebug() << "No wrapper set for property " << property.m_name;
+        return false;
+    }
 
     return true;
 }
