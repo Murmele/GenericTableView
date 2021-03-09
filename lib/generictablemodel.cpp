@@ -117,6 +117,8 @@ bool GenericTableModel::appendProperty(const Property &property, const QVariant 
                 setData(idx, property.wrapper->initialValue());
         } else
             setData(idx, property.wrapper->widgetValue());
+
+        emit propertyAdded(property.m_name);
     }
     else
     {
@@ -181,8 +183,10 @@ bool GenericTableModel::removeProperties(const int startIndex, const int endInde
     for (int i = endIndex; i >= startIndex; i--)
     {
         // TODO: check if the parameters are removed correctly
+        QString propName = m_properties[i]->m_name;
         delete m_properties[i];
         m_properties.remove(i);
+        emit propertyRemoved(propName);
     }
     endRemoveRows();
 
@@ -215,11 +219,20 @@ bool GenericTableModel::updateProperty(const QString& name, const QVariant& valu
 {
     for (int i = 0; i < m_properties.length(); i++) {
         if (m_properties[i]->m_name == name) {
-            m_properties[i]->setValue(value);
             QModelIndex index = createIndex(i, Columns::Value, m_properties[i]);
-            emit dataChanged(index, index, {Qt::DisplayRole});
+            setData(index, value);
             return true;
         }
     }
     return false;
+}
+
+const Property* GenericTableModel::property(const QString& name)
+{
+    for (int i = 0; i < m_properties.length(); i++) {
+        if (m_properties[i]->m_name == name) {
+            return m_properties[i];
+        }
+    }
+    return nullptr;
 }

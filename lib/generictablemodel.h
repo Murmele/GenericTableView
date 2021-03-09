@@ -27,6 +27,7 @@ public:
     bool setHeader(QStringList &header);
     QStringList header() { return m_header; }
     QVector<Property *> properties() { return m_properties; }
+    const Property* property(const QString& name);
 
     enum UserRoles {
         Widget = Qt::UserRole + 1,
@@ -80,6 +81,11 @@ public:
         Value = 1,  // Values are stored in the second column
         ColumnCount // counts the columns
     };
+
+signals:
+    void propertyRemoved(const QString& name);
+    void propertyUpdated(const QString& name);
+    void propertyAdded(const QString& name);
 
 private:
     QVector<Property *> m_properties; // contains all properties in the model
