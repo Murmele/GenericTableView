@@ -65,6 +65,15 @@ public:
      * \return true if the property was updated, false if the property was not found
      */
     bool updateProperty(const Property property);
+    /*!
+     * \brief updateProperty
+     * Update the value of a property. Returns true if the update was successful,
+     * otherwise false or the property with name \p name does not exist
+     * \param name
+     * \param value
+     * \return
+     */
+    bool updateProperty(const QString& name, const QVariant& value);
 
     enum Columns {
         Description = 0,

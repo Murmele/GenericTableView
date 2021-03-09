@@ -210,3 +210,16 @@ bool GenericTableModel::updateProperty(const Property property)
 
     return false;
 }
+
+bool GenericTableModel::updateProperty(const QString& name, const QVariant& value)
+{
+    for (int i = 0; i < m_properties.length(); i++) {
+        if (m_properties[i]->m_name == name) {
+            m_properties[i]->setValue(value);
+            QModelIndex index = createIndex(i, Columns::Value, m_properties[i]);
+            emit dataChanged(index, index, {Qt::DisplayRole});
+            return true;
+        }
+    }
+    return false;
+}
