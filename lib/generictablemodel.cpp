@@ -178,7 +178,7 @@ bool GenericTableModel::removeProperties(const int startIndex, const int endInde
     int first = startIndex;
     int last = endIndex;
     beginRemoveRows(QModelIndex(), first, last);
-    for (int i = startIndex; i <= endIndex; i++)
+    for (int i = endIndex; i >= startIndex; i--)
     {
         // TODO: check if the parameters are removed correctly
         delete m_properties[i];
