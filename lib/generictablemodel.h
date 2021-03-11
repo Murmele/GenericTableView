@@ -6,6 +6,7 @@
 
 class GenericTableModel : public QAbstractTableModel
 {
+    Q_OBJECT
 public:
     GenericTableModel(QObject *parent = nullptr);
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
