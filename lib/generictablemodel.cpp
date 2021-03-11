@@ -1,4 +1,5 @@
 #include "generictablemodel.h"
+#include "wrappermanager.h"
 
 #include <QDebug>
 
@@ -107,16 +108,18 @@ bool GenericTableModel::appendProperty(Property* property, const QVariant initia
     endInsertRows();
 
     QModelIndex idx = createIndex(first, Columns::Value, m_properties[m_properties.length() - 1]);
-    if (property->wrapper)
+    WrapperManager* wrapperManager = WrapperManager::instance();
+    QSharedPointer<PropertySelectionWrapper> wrapper = wrapperManager->wrapperWidget(property->m_datatype);
+    if (wrapper)
     {
         if (initialValue.isValid()) {
             // check if valid value
-            if (property->wrapper->validValue(initialValue))
+            if (wrapper->validValue(initialValue))
                 setData(idx, initialValue);
             else // set default valid value
-                setData(idx, property->wrapper->initialValue());
+                setData(idx, wrapper->initialValue());
         } else
-            setData(idx, property->wrapper->widgetValue());
+            setData(idx, wrapper->widgetValue());
 
         emit propertyAdded(property->m_name);
     }

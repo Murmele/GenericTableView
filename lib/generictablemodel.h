@@ -27,7 +27,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
     bool setHeader(QStringList &header);
     QStringList header() { return m_header; }
-    QVector<Property *> properties() { return m_properties; }
+    const QVector<Property *> properties() { return m_properties; }
     const Property* property(const QString& name);
 
     enum UserRoles {

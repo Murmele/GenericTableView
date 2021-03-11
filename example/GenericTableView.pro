@@ -20,6 +20,7 @@ SOURCES += \
     ../lib/Wrapper/propertyselectiondoublespinbox.cpp \
     ../lib/Wrapper/propertyselectionlineedit.cpp \
     ../lib/Wrapper/propertyselectionspinbox.cpp \
+    ../lib/wrappermanager.cpp \
     ../lib/generictabledelegator.cpp \
     ../lib/generictablemodel.cpp \
     ../lib/generictableview.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
     ../lib/Wrapper/propertyselectiondoublespinbox.h \
     ../lib/Wrapper/propertyselectionlineedit.h \
     ../lib/Wrapper/propertyselectionspinbox.h \
+    ../lib/wrappermanager.h \
     ../lib/generictabledelegator.h \
     ../lib/generictablemodel.h \
     ../lib/generictableview.h \

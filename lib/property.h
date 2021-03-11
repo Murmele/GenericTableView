@@ -13,12 +13,10 @@
 class PropertySelectionWrapper
 {
 public:
-    PropertySelectionWrapper(QWidget* widget): mWidget(widget){};
-    ~PropertySelectionWrapper()
-    {
-        delete mWidget;
-		mWidget = nullptr;
-    }
+    PropertySelectionWrapper(QWidget* widget): mWidget(widget){
+        if (mWidget)
+            mWidget->setHidden(true);
+    };
 
     /*!
      * \brief setWidgetValue
@@ -62,8 +60,7 @@ struct Property
 public:
     Property();
     Property(QString name,
-             QString datatype,
-             QSharedPointer<PropertySelectionWrapper> widget = nullptr);
+             QString datatype);
 
     /*!
      * \brief setValue
@@ -78,15 +75,6 @@ public:
      * \return 
      */
     QVariant value() const { return m_value; }
-
-    /*!
-     * \brief widget
-     * Access the widget inside the wrapper. This can be used
-     * to set specific properties to the widget. For example
-     * minimum and maximum in a spinbox
-     * \return 
-     */
-    QWidget *widget() { return wrapper->widget(); }
 
     // desired to be public
 public:
@@ -116,13 +104,6 @@ public:
      * Value of the property is stored in this variable
      */
     QVariant m_value;
-    /*!
-     * \brief wrapper
-     * This is a wrapper for different widgets to get a common interface.
-     * Contains a Widget with all possible widgets which can be used for changing the value, 
-     * for example spinbox, font selection, combobox, ....
-     */
-    QSharedPointer<PropertySelectionWrapper> wrapper{nullptr};
 };
 
 #endif // PROPERTY_H

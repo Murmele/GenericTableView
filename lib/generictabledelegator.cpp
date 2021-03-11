@@ -2,6 +2,7 @@
 
 #include "generictablemodel.h"
 #include "property.h"
+#include "wrappermanager.h"
 
 GenericTableDelegator::GenericTableDelegator(QObject *parent) : QStyledItemDelegate(parent) {}
 
@@ -14,9 +15,10 @@ QWidget *GenericTableDelegator::createEditor(QWidget *parent,
         return nullptr;
     else if (index.column() == GenericTableModel::Columns::Value) {
         Property *p = static_cast<Property *>(index.internalPointer());
+        auto wrapper = WrapperManager::instance()->wrapperWidget(p->m_datatype);
         //Only possible when widget gets not destroyed in destroy Editor
-        if (p->wrapper) { // the widget it self is not a smartpointer, but the wrapper
-            QWidget *w = p->widget();
+        if (wrapper) { // the widget it self is not a smartpointer, but the wrapper
+            QWidget *w = wrapper->widget();
             w->setParent(parent);
             return w;
         }
@@ -45,8 +47,9 @@ void GenericTableDelegator::setEditorData(QWidget *editor, const QModelIndex &in
     QVariant val = index.model()->data(index, Qt::EditRole);
 
     Property *p = static_cast<Property *>(index.internalPointer());
-    if (p->wrapper) // because the widget might already be deleted outside
-        p->wrapper->setWidgetValue(val);
+    auto wrapper = WrapperManager::instance()->wrapperWidget(p->m_datatype);
+    if (wrapper) // because the widget might already be deleted outside
+        wrapper->setWidgetValue(val);
 }
 
 // editor --> model
@@ -60,10 +63,11 @@ void GenericTableDelegator::setModelData(QWidget *editor,
         return;
 
     Property *p = static_cast<Property *>(index.internalPointer());
-    if (!p->wrapper)
+    auto wrapper = WrapperManager::instance()->wrapperWidget(p->m_datatype);
+    if (!wrapper)
         return;
 
-    QVariant value = p->wrapper->widgetValue();
+    QVariant value = wrapper->widgetValue();
     model->setData(index, value, Qt::EditRole);
 }
 

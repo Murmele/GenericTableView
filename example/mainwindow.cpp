@@ -15,6 +15,7 @@
 #include "../lib/Wrapper/propertyselectiondoublespinbox.h"
 #include "../lib/Wrapper/propertyselectionlineedit.h"
 #include "../lib/Wrapper/propertyselectionspinbox.h"
+#include "../lib/wrappermanager.h"
 
 namespace  {
     /*!
@@ -84,6 +85,24 @@ MainWindow::MainWindow(QWidget *parent)
     mainLayout->addWidget(view);
 
     ui->centralwidget->setLayout(mainLayout);
+
+    WrapperManager* manager = WrapperManager::instance();
+    manager->addWrapperWidget("Text", QSharedPointer<PropertySelectionWrapper>(
+                                  new PropertySelectionLineEdit(this)));
+    manager->addWrapperWidget("Double", QSharedPointer<PropertySelectionWrapper>(
+                                  new PropertySelectionDoubleSpinBox(this)));
+
+    auto pSpinbox = QSharedPointer<PropertySelectionWrapper>(new PropertySelectionSpinBox(this));
+    // Set initial value
+    // Also ranges and whatever you want can be done here
+    static_cast<QSpinBox *>(pSpinbox->widget())->setValue(10);
+    manager->addWrapperWidget("Integer", pSpinbox);
+
+    auto pCombo = QSharedPointer<PropertySelectionWrapper>(new PropertyselectionCombobox(this));
+    // set items in the combobox
+    QComboBox *cb = static_cast<QComboBox *>(pCombo->widget());
+    cb->addItems({"Test1", "Test2"});
+    manager->addWrapperWidget("Selection", pCombo);
 }
 
 MainWindow::~MainWindow()
@@ -106,24 +125,6 @@ void MainWindow::addProperty()
     QString datatype = dialog.datatype();
 
     Property* p = new Property(name, datatype);
-    if (datatype == "Text") {
-        p->wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertySelectionLineEdit(this));
-
-    } else if (datatype == "Integer") {
-        p->wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertySelectionSpinBox(this));
-        // Set initial value
-        // Also ranges and whatever you want can be done here
-        static_cast<QSpinBox *>(p->widget())->setValue(10);
-
-    } else if (datatype == "Double") {
-        p->wrapper = QSharedPointer<PropertySelectionWrapper>(
-            new PropertySelectionDoubleSpinBox(this));
-    } else if (datatype == "Selection") {
-        p->wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertyselectionCombobox(this));
-        // set items in the combobox
-        QComboBox *cb = static_cast<QComboBox *>(p->widget());
-        cb->addItems({"Test1", "Test2"});
-    }
 
     model->appendProperty(p);
 }
