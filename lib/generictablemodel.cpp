@@ -91,10 +91,10 @@ bool GenericTableModel::setData(const QModelIndex &index, const QVariant &value,
     return false;
 }
 
-bool GenericTableModel::appendProperty(const Property &property, const QVariant initialValue)
+bool GenericTableModel::appendProperty(Property* property, const QVariant initialValue)
 {
     for (Property *p : m_properties) {
-        if (p->m_name == property.m_name) {
+        if (p->m_name == property->m_name) {
             return false;
         }
     }
@@ -103,26 +103,26 @@ bool GenericTableModel::appendProperty(const Property &property, const QVariant 
     int last = m_properties.length();
     beginInsertRows(QModelIndex(), first, last);
     // TODO: check if the parameters are applied
-    m_properties.append(new Property(property));
+    m_properties.append(property);
     endInsertRows();
 
     QModelIndex idx = createIndex(first, Columns::Value, m_properties[m_properties.length() - 1]);
-    if (property.wrapper)
+    if (property->wrapper)
     {
         if (initialValue.isValid()) {
             // check if valid value
-            if (property.wrapper->validValue(initialValue))
+            if (property->wrapper->validValue(initialValue))
                 setData(idx, initialValue);
             else // set default valid value
-                setData(idx, property.wrapper->initialValue());
+                setData(idx, property->wrapper->initialValue());
         } else
-            setData(idx, property.wrapper->widgetValue());
+            setData(idx, property->wrapper->widgetValue());
 
-        emit propertyAdded(property.m_name);
+        emit propertyAdded(property->m_name);
     }
     else
     {
-        qDebug() << "No wrapper set for property " << property.m_name;
+        qDebug() << "No wrapper set for property " << property->m_name;
         return false;
     }
 

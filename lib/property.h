@@ -64,7 +64,6 @@ public:
     Property(QString name,
              QString datatype,
              QSharedPointer<PropertySelectionWrapper> widget = nullptr);
-    Property(const Property &p);
 
     /*!
      * \brief setValue

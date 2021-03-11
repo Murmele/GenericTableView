@@ -40,7 +40,7 @@ public:
      * \param property
      * \return true if the property was added successfully, else false
      */
-    bool appendProperty(const Property &property, const QVariant initialValue = QVariant());
+    bool appendProperty(Property *property, const QVariant initialValue = QVariant());
 
     bool removeProperty(const Property &property);
     bool removeProperty(const QString &propertyname);

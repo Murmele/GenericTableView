@@ -105,23 +105,23 @@ void MainWindow::addProperty()
     QString name = dialog.name();
     QString datatype = dialog.datatype();
 
-    Property p(name, datatype);
+    Property* p = new Property(name, datatype);
     if (datatype == "Text") {
-        p.wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertySelectionLineEdit(this));
+        p->wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertySelectionLineEdit(this));
 
     } else if (datatype == "Integer") {
-        p.wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertySelectionSpinBox(this));
+        p->wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertySelectionSpinBox(this));
         // Set initial value
         // Also ranges and whatever you want can be done here
-        static_cast<QSpinBox *>(p.widget())->setValue(10);
+        static_cast<QSpinBox *>(p->widget())->setValue(10);
 
     } else if (datatype == "Double") {
-        p.wrapper = QSharedPointer<PropertySelectionWrapper>(
+        p->wrapper = QSharedPointer<PropertySelectionWrapper>(
             new PropertySelectionDoubleSpinBox(this));
     } else if (datatype == "Selection") {
-        p.wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertyselectionCombobox(this));
+        p->wrapper = QSharedPointer<PropertySelectionWrapper>(new PropertyselectionCombobox(this));
         // set items in the combobox
-        QComboBox *cb = static_cast<QComboBox *>(p.widget());
+        QComboBox *cb = static_cast<QComboBox *>(p->widget());
         cb->addItems({"Test1", "Test2"});
     }
 
