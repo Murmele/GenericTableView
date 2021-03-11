@@ -13,7 +13,12 @@
 class PropertySelectionWrapper
 {
 public:
-    PropertySelectionWrapper(){};
+    PropertySelectionWrapper(QWidget* widget): mWidget(widget){};
+    ~PropertySelectionWrapper()
+    {
+        delete mWidget;
+		mWidget = nullptr;
+    }
 
     /*!
      * \brief setWidgetValue
@@ -33,7 +38,7 @@ public:
      * Returns the widget which is used to modify the table cell
      * \return
      */
-    virtual QWidget *widget() const = 0;
+    QWidget *widget() {return mWidget;};
     /*!
      * \brief validValue
      * Validates the value. If \p value is valid, true is returned, otherwise false
@@ -47,6 +52,9 @@ public:
      * \return
      */
     virtual QVariant initialValue() const = 0;
+
+private:
+    QWidget* mWidget{nullptr};
 };
 
 struct Property

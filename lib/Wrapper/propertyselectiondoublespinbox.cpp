@@ -1,7 +1,7 @@
 #include "propertyselectiondoublespinbox.h"
 
 PropertySelectionDoubleSpinBox::PropertySelectionDoubleSpinBox(QWidget *parent)
-    : PropertySelectionWrapper(), m_sb(new QDoubleSpinBox(parent))
+    : PropertySelectionWrapper(new QDoubleSpinBox(parent)), m_sb(static_cast<QDoubleSpinBox*>(widget()))
 {}
 
 bool PropertySelectionDoubleSpinBox::setWidgetValue(const QVariant &value)

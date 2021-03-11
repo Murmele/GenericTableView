@@ -1,7 +1,7 @@
 #include "propertyselectioncombobox.h"
 
 PropertyselectionCombobox::PropertyselectionCombobox(QWidget *parent)
-    : PropertySelectionWrapper(), m_cb(new QComboBox(parent))
+    : PropertySelectionWrapper(new QComboBox(parent)), m_cb(static_cast<QComboBox*>(widget()))
 {}
 
 bool PropertyselectionCombobox::setWidgetValue(const QVariant &value)

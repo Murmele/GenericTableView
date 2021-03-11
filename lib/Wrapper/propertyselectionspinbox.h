@@ -12,7 +12,6 @@ public:
 
     virtual bool setWidgetValue(const QVariant &value) override;
     virtual QVariant widgetValue() const override;
-    virtual QWidget *widget() const override { return m_sb; }
     virtual bool validValue(const QVariant &value) const override;
     virtual QVariant initialValue() const override;
 

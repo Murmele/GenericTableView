@@ -1,8 +1,10 @@
 #include "propertyselectionspinbox.h"
 
 PropertySelectionSpinBox::PropertySelectionSpinBox(QWidget *parent)
-    : PropertySelectionWrapper(), m_sb(new QSpinBox(parent))
-{}
+    : PropertySelectionWrapper(new QSpinBox(parent))
+{
+    m_sb = static_cast<QSpinBox*>(widget());
+}
 
 bool PropertySelectionSpinBox::setWidgetValue(const QVariant &value)
 {

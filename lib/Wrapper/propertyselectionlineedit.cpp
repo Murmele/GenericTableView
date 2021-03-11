@@ -1,7 +1,7 @@
 #include "propertyselectionlineedit.h"
 
 PropertySelectionLineEdit::PropertySelectionLineEdit(QWidget *parent)
-    : PropertySelectionWrapper(), m_le(new QLineEdit(parent))
+    : PropertySelectionWrapper(new QLineEdit(parent)), m_le(static_cast<QLineEdit*>(widget()))
 {}
 
 bool PropertySelectionLineEdit::setWidgetValue(const QVariant &value)
