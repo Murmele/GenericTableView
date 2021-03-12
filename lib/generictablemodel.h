@@ -91,6 +91,7 @@ signals:
 private:
     QVector<Property *> m_properties; // contains all properties in the model
     QStringList m_header;
+    bool mIgnoreSendUpdateSignal{false};
 };
 
 #endif // GENERICTABLEMODEL_H

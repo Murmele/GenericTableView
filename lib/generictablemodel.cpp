@@ -86,6 +86,8 @@ bool GenericTableModel::setData(const QModelIndex &index, const QVariant &value,
     if (p) {
         p->setValue(value);
         emit dataChanged(index, index, {role});
+        if (!mIgnoreSendUpdateSignal)
+            emit propertyUpdated(p->m_name);
         return true;
     }
 
@@ -112,6 +114,7 @@ bool GenericTableModel::appendProperty(Property* property, const QVariant initia
     QSharedPointer<PropertySelectionWrapper> wrapper = wrapperManager->wrapperWidget(property->m_datatype);
     if (wrapper)
     {
+        mIgnoreSendUpdateSignal = true;
         if (initialValue.isValid()) {
             // check if valid value
             if (wrapper->validValue(initialValue))
@@ -120,6 +123,8 @@ bool GenericTableModel::appendProperty(Property* property, const QVariant initia
                 setData(idx, wrapper->initialValue());
         } else
             setData(idx, wrapper->widgetValue());
+
+        mIgnoreSendUpdateSignal = false;
 
         emit propertyAdded(property->m_name);
     }
@@ -211,6 +216,7 @@ bool GenericTableModel::updateProperty(const Property property)
             *m_properties[i] = property;
             QModelIndex index = createIndex(i, Columns::Value, m_properties[i]);
             emit dataChanged(index, index, {Qt::DisplayRole});
+            emit propertyUpdated(property.m_name);
             return true;
         }
     }
@@ -224,6 +230,8 @@ bool GenericTableModel::updateProperty(const QString& name, const QVariant& valu
         if (m_properties[i]->m_name == name) {
             QModelIndex index = createIndex(i, Columns::Value, m_properties[i]);
             setData(index, value);
+            // No need for emit propertyUpdated(property.m_name);,
+            // because already done in setData()
             return true;
         }
     }

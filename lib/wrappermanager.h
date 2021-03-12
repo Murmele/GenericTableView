@@ -14,9 +14,13 @@ public:
        return _instance;
     }
 
-    void addWrapperWidget(const QString& wrappername, QSharedPointer<PropertySelectionWrapper> wrapper)
+    bool addWrapperWidget(const QString& wrappername, QSharedPointer<PropertySelectionWrapper> wrapper)
     {
+        if (mWrappers.contains(wrappername))
+            return false;
+
         mWrappers[wrappername] = wrapper;
+        return true;
     }
 
     QSharedPointer<PropertySelectionWrapper> wrapperWidget(const QString& wrappername)
